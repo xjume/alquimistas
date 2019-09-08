@@ -1,0 +1,42 @@
+import alquimista.*
+
+describe "Alquimistas Test" {
+ 	
+  // Código que siempre se ejecuta al principio. Sirve para inicializar en tests.
+  // fixture { 
+  //	alquimista.agregarItem(bomba)
+  // }
+ 	
+  test "Un alquimista tiene criterio si no tiene items de combate" {
+	assert.that(alquimista.tieneCriterio()) 	
+  }
+  
+  test "Un alquimista tiene criterio teniendo items de combate" {
+  	alquimista.agregarItemDeCombate(bomba)
+	alquimista.agregarItemDeCombate(pocion)
+	assert.that(alquimista.tieneCriterio()) 	
+  }
+ 
+  test "Un alquimista no tiene criterio teniendo item de combate" {
+ 	alquimista.agregarItemDeCombate(pocion)
+	assert.notThat(alquimista.tieneCriterio())
+  } 
+  
+   test "Un alquimista es buen explorador" {
+   	alquimista.agregarItemDeRecoleccion("red")
+   	alquimista.agregarItemDeRecoleccion("red")
+   	alquimista.agregarItemDeRecoleccion("red")
+   	alquimista.agregarItemDeRecoleccion("red")
+    assert.that(alquimista.esBuenExplorador()) 	
+  }	
+   
+   test "Un alquimista no es un buen explorador" {
+   	assert.notThat(alquimista.esBuenExplorador())
+  }
+   
+   test "Capacidad ofensiva de un alquimista con bomba y poción es 100" {
+   	alquimista.agregarItemDeCombate(bomba)
+   	alquimista.agregarItemDeCombate(pocion)
+   	assert.equals(100,alquimista.capacidadOfensiva())
+  }
+}
